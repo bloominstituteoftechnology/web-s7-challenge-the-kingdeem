@@ -43,6 +43,25 @@ function sum(a, b) {
   return a + b
 }
 
+describe('Testing of sum function', () => {
+  test('throws an error "pass valid numbers"', () => {
+    expect(() => sum()).toThrowError(Error)
+    expect(() => sum(2,'seven')).toThrowError(Error)
+  })
+  test('returns 4', () => {
+    let result = sum(1, 3)
+    expect(result).toBe(4)
+  })
+  test('returns 3', () => {
+    let result = sum('1', 2)
+    expect(result).toBe(3)
+  })
+  test('returns 13', () => {
+    let result = sum('10', '3')
+    expect(result).toBe(13)
+  })
+})
+
 function HelloWorld() {
   return (
     <div>
@@ -61,3 +80,30 @@ function HelloWorld() {
     </div>
   )
 }
+
+describe('Testing of HelloWorld component', () => {
+    test('renders a link that says "Home"', () => {
+      render(<HelloWorld />)
+      expect(screen.queryByText('Home')).toBeVisible()
+    })
+    test('renders a link that says "About"', () => {
+      render(<HelloWorld />)
+      expect(screen.queryByText('About')).toBeVisible()
+    })
+    test('renders a link that says "Blog"', () => {
+      render(<HelloWorld />)
+      expect(screen.queryByText('Blog')).toBeVisible()
+    })
+    test('renders a text that reads "The Truth"', () => {
+      render(<HelloWorld />)
+      expect(screen.queryByText('The Truth')).toBeVisible()
+    })
+    test('renders a text that reads "JavaScript is pretty awesome"', () => {
+      render(<HelloWorld />)
+      expect(screen.queryByText('JavaScript is pretty awesome')).toBeVisible()
+    })
+    test('renders a text that includes "javaScript is pretty"', () => {
+      render(<HelloWorld />)
+      expect(screen.queryByText(/javaScript is pretty/i)).toBeVisible()
+    })
+  })
