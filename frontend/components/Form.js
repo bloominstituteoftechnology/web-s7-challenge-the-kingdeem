@@ -18,7 +18,7 @@ fullName: yup
 size: yup
 .string()
 .trim()
-.oneOf(['Small', 'Medium', 'Large'], validationErrors.sizeIncorrect),
+.oneOf(['S', 'M', 'L'], validationErrors.sizeIncorrect),
 });
 
 // 👇 This array could help you construct your checkboxes using .map in the JSX.
@@ -39,23 +39,23 @@ toppings: Object.fromEntries(toppings.map(topping => [topping.topping_id, false]
 });
 const [formErrors, setFormErrors] = useState({});
 const [formValid, setFormValid] = useState(false);
-const [formSuccess, setFormSuccess] = useState(false);
-const [formFailure, setFormFailure] = useState(false);
+const [formSuccess, setFormSuccess] = useState('');
+const [formFailure, setFormFailure] = useState('');
 
 useEffect(() => {
 formSchema
 .validate(formValues, { abortEarly: false })
 .then(() => {
-setFormValid(true);
-setFormErrors({});
+  setFormValid(true);
+  setFormErrors({});
 })
 .catch(err => {
-setFormValid(false);
-const newErrors = {};
-err.inner.forEach(error => {
-newErrors[error.path] = error.message;
-});
-setFormErrors(newErrors);
+  setFormValid(false);
+  const newErrors = {};
+  err.inner.forEach(error => {
+    newErrors[error.path] = error.message;
+  });
+  setFormErrors(newErrors);
 });
 }, [formValues]);
 
